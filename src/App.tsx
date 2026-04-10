@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
-import AppShell from "./AppShell";
+import AppShell from "./app/AppShell";
 
 function AuthScreen() {
   const [email, setEmail] = useState("");
