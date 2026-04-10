@@ -293,7 +293,6 @@ export default function AppShell() {
   const totalCount = tasks.length;
   const openTaskCount = tasks.filter((t) => !t.completed && !t.is_archived).length;
   const doneTaskCount = tasks.filter((t) => t.completed && !t.is_archived).length;
-  const importantCount = tasks.filter((t) => !!t.is_important && !t.is_archived).length;
   const archivedCount = tasks.filter((t) => !!t.is_archived).length;
   const overdueCount = tasks.filter(
     (t) => !!t.due_date && !t.completed && !t.is_archived && isOverdue(t.due_date)
