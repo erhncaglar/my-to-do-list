@@ -2027,12 +2027,14 @@ const dangerGhostButton: React.CSSProperties = {
 };
 
 const addListColumn: React.CSSProperties = {
-  minWidth: 280,
-  width: 280,
+  minWidth: window.innerWidth < 768 ? "100%" : 280,
+  width: window.innerWidth < 768 ? "100%" : 280,
+  maxWidth: "100%",
   borderRadius: 24,
   background: "rgba(255,255,255,0.03)",
   border: "1px dashed rgba(255,255,255,0.12)",
   padding: 14,
+  boxSizing: "border-box",
 };
 
 const addListButton: React.CSSProperties = {

@@ -1682,16 +1682,25 @@ const signOutButton: React.CSSProperties = {
 };
 
 const boardWrap: React.CSSProperties = {
-  display: "grid",
-  gridTemplateColumns:
-    window.innerWidth < 768 ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))",
-  gap: 16,
-  alignItems: "start",
+  display: window.innerWidth < 768 ? "grid" : "flex",
+  gridTemplateColumns: window.innerWidth < 768 ? "1fr" : undefined,
+  gap: window.innerWidth < 768 ? 16 : 18,
+  overflowX: window.innerWidth < 768 ? "visible" : "auto",
+  paddingBottom: 12,
+  alignItems: "flex-start",
 };
 
 const columnStyle: React.CSSProperties = {
-  width: "100%",
-  minWidth: 0,
+  minWidth: window.innerWidth < 768 ? "100%" : 340,
+  width: window.innerWidth < 768 ? "100%" : 340,
+  maxWidth: "100%",
+  flexShrink: 0,
+  borderRadius: 24,
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  padding: 14,
+  boxShadow: "0 20px 40px rgba(0,0,0,0.22)",
+  boxSizing: "border-box",
 };
 
 const columnHeader: React.CSSProperties = {
@@ -1909,8 +1918,16 @@ const dangerGhostButton: React.CSSProperties = {
 };
 
 const columnStyle: React.CSSProperties = {
-  width: "100%",
-  minWidth: 0,
+  minWidth: window.innerWidth < 768 ? "100%" : 340,
+  width: window.innerWidth < 768 ? "100%" : 340,
+  maxWidth: "100%",
+  flexShrink: 0,
+  borderRadius: 24,
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  padding: 14,
+  boxShadow: "0 20px 40px rgba(0,0,0,0.22)",
+  boxSizing: "border-box",
 };
 
 const addListButton: React.CSSProperties = {
