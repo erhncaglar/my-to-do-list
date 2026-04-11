@@ -1917,16 +1917,14 @@ const dangerGhostButton: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const columnStyle: React.CSSProperties = {
-  minWidth: window.innerWidth < 768 ? "100%" : 340,
-  width: window.innerWidth < 768 ? "100%" : 340,
+const addListColumn: React.CSSProperties = {
+  minWidth: window.innerWidth < 768 ? "100%" : 280,
+  width: window.innerWidth < 768 ? "100%" : 280,
   maxWidth: "100%",
-  flexShrink: 0,
   borderRadius: 24,
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.08)",
+  background: "rgba(255,255,255,0.03)",
+  border: "1px dashed rgba(255,255,255,0.12)",
   padding: 14,
-  boxShadow: "0 20px 40px rgba(0,0,0,0.22)",
   boxSizing: "border-box",
 };
 
