@@ -79,11 +79,25 @@ export default function SearchPanel({
   metricLabel,
   metricValueSmall,
 }: SearchPanelProps) {
+  const isMobile = window.innerWidth < 768;
+
   return (
-    <aside style={isSearchOpen ? searchPanel : searchPanelCollapsed}>
+    <aside
+      style={{
+        ...(isSearchOpen ? searchPanel : searchPanelCollapsed),
+        width: "100%",
+        position: isMobile ? "relative" : "sticky",
+        top: isMobile ? undefined : 24,
+        maxHeight: isMobile ? "none" : "calc(100vh - 48px)",
+        overflow: "auto",
+      }}
+    >
       <button
         onClick={() => setIsSearchOpen((prev) => !prev)}
-        style={searchToggleButton}
+        style={{
+          ...searchToggleButton,
+          width: "100%",
+        }}
       >
         {isSearchOpen ? "Filtreleri Gizle" : "Ara"}
       </button>
@@ -202,7 +216,14 @@ export default function SearchPanel({
             Filtreleri Temizle
           </button>
 
-          <div style={searchStats}>
+          <div
+            style={{
+              ...searchStats,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 12,
+            }}
+          >
             <div style={metricCardSmall}>
               <div style={metricLabel}>Görünen kart</div>
               <div style={metricValueSmall}>{visibleTasksCount}</div>

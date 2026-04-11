@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "../lib/supabase";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
+import SearchPanel from "../components/dashboard/SearchPanel";
 
 type TaskList = {
   id: string;
@@ -844,9 +845,15 @@ export default function AppShell() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: isSearchOpen ? "minmax(0, 1fr) 320px" : "minmax(0, 1fr) 76px",
-          gap: 20,
+          gridTemplateColumns:
+  window.innerWidth < 768
+    ? "1fr"
+    : isSearchOpen
+    ? "minmax(0, 1fr) 320px"
+    : "minmax(0, 1fr) 76px",
+          gap: window.innerWidth < 768 ? 12 : 20,
           alignItems: "start",
+          overflow: "hidden",
         }}
       >
         <div style={boardArea}>
@@ -1157,141 +1164,39 @@ export default function AppShell() {
           )}
         </div>
 
-        <aside style={isSearchOpen ? searchPanel : searchPanelCollapsed}>
-          <button
-            onClick={() => setIsSearchOpen((prev) => !prev)}
-            style={searchToggleButton}
-          >
-            {isSearchOpen ? "Filtreleri Gizle" : "Ara"}
-          </button>
-
-          {isSearchOpen && (
-            <>
-              <h2 style={{ marginTop: 0, marginBottom: 16 }}>Arama ve Filtre</h2>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Arama</label>
-                <input
-                  type="text"
-                  placeholder="Kart, açıklama, etiket, link ara"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  style={searchInput}
-                />
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Liste</label>
-                <select
-                  value={filterListId}
-                  onChange={(e) => setFilterListId(e.target.value)}
-                  style={searchInput}
-                >
-                  <option value="all">Tüm listeler</option>
-                  {lists.map((list) => (
-                    <option key={list.id} value={list.id}>
-                      {list.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Etiket</label>
-                <select
-                  value={filterTag}
-                  onChange={(e) => setFilterTag(e.target.value)}
-                  style={searchInput}
-                >
-                  <option value="all">Tüm etiketler</option>
-                  {allTags.map((tag) => (
-                    <option key={tag} value={tag}>
-                      {tag}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Durum</label>
-                <select
-                  value={filterStatus}
-                  onChange={(e) => setFilterStatus(e.target.value)}
-                  style={searchInput}
-                >
-                  <option value="all">Tümü</option>
-                  <option value="open">Açık</option>
-                  <option value="done">Tamamlanan</option>
-                </select>
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Öncelik</label>
-                <select
-                  value={filterPriority}
-                  onChange={(e) => setFilterPriority(e.target.value)}
-                  style={searchInput}
-                >
-                  <option value="all">Tümü</option>
-                  <option value="low">Düşük</option>
-                  <option value="medium">Orta</option>
-                  <option value="high">Yüksek</option>
-                </select>
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Önem</label>
-                <select
-                  value={filterImportant}
-                  onChange={(e) => setFilterImportant(e.target.value)}
-                  style={searchInput}
-                >
-                  <option value="all">Tümü</option>
-                  <option value="important">Yalnız önemli</option>
-                  <option value="normal">Normal</option>
-                </select>
-              </div>
-
-              <div style={filterGroup}>
-                <label style={filterLabel}>Arşiv</label>
-                <label style={completedToggle}>
-                  <input
-                    type="checkbox"
-                    checked={showArchived}
-                    onChange={(e) => setShowArchived(e.target.checked)}
-                  />
-                  {showArchived ? "Arşivdekileri göster" : "Aktif kartları göster"}
-                </label>
-              </div>
-
-              <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setFilterListId("all");
-                  setFilterTag("all");
-                  setFilterStatus("all");
-                  setFilterPriority("all");
-                  setFilterImportant("all");
-                  setShowArchived(false);
-                }}
-                style={resetFiltersButton}
-              >
-                Filtreleri Temizle
-              </button>
-
-              <div style={searchStats}>
-                <div style={metricCardSmall}>
-                  <div style={metricLabel}>Görünen kart</div>
-                  <div style={metricValueSmall}>{visibleTasks.length}</div>
-                </div>
-                <div style={metricCardSmall}>
-                  <div style={metricLabel}>Toplam liste</div>
-                  <div style={metricValueSmall}>{lists.length}</div>
-                </div>
-              </div>
-            </>
-          )}
-        </aside>
+        <SearchPanel
+  isSearchOpen={isSearchOpen}
+  setIsSearchOpen={setIsSearchOpen}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+  filterListId={filterListId}
+  setFilterListId={setFilterListId}
+  filterTag={filterTag}
+  setFilterTag={setFilterTag}
+  filterStatus={filterStatus}
+  setFilterStatus={setFilterStatus}
+  filterPriority={filterPriority}
+  setFilterPriority={setFilterPriority}
+  filterImportant={filterImportant}
+  setFilterImportant={setFilterImportant}
+  showArchived={showArchived}
+  setShowArchived={setShowArchived}
+  lists={lists}
+  allTags={allTags}
+  visibleTasksCount={visibleTasks.length}
+  searchPanel={searchPanel}
+  searchPanelCollapsed={searchPanelCollapsed}
+  searchToggleButton={searchToggleButton}
+  filterGroup={filterGroup}
+  filterLabel={filterLabel}
+  searchInput={searchInput}
+  completedToggle={completedToggle}
+  resetFiltersButton={resetFiltersButton}
+  searchStats={searchStats}
+  metricCardSmall={metricCardSmall}
+  metricLabel={metricLabel}
+  metricValueSmall={metricValueSmall}
+/>
       </div>
 
       {selectedTask && detailForm && (
@@ -1704,6 +1609,7 @@ const topBarStyle: React.CSSProperties = {
   gap: 16,
   flexWrap: "wrap",
   marginBottom: 20,
+  flexDirection: window.innerWidth < 768 ? "column" : "row",
 };
 
 const welcomeEyebrow: React.CSSProperties = {
@@ -1776,15 +1682,18 @@ const signOutButton: React.CSSProperties = {
 
 const boardWrap: React.CSSProperties = {
   display: "flex",
-  gap: 18,
+  gap: window.innerWidth < 768 ? 12 : 18,
   overflowX: "auto",
-  paddingBottom: 8,
+  paddingBottom: 12,
   alignItems: "flex-start",
+  scrollSnapType: window.innerWidth < 768 ? "x mandatory" : "none",
 };
 
 const columnStyle: React.CSSProperties = {
-  minWidth: 340,
-  width: 340,
+  minWidth: window.innerWidth < 768 ? 280 : 340,
+  width: window.innerWidth < 768 ? 280 : 340,
+  flexShrink: 0,
+  scrollSnapAlign: "start",
   borderRadius: 24,
   background: "rgba(255,255,255,0.04)",
   border: "1px solid rgba(255,255,255,0.08)",
@@ -2129,14 +2038,16 @@ const modalOverlay: React.CSSProperties = {
 };
 
 const modalCard: React.CSSProperties = {
-  width: "100%",
-  maxWidth: 900,
-  maxHeight: "90vh",
-  overflowY: "auto",
-  borderRadius: 24,
-  background: "#17191f",
+  width: window.innerWidth < 768
+    ? "calc(100vw - 24px)"
+    : "min(920px, calc(100vw - 48px))",
+  maxHeight: window.innerWidth < 768 ? "88vh" : "90vh",
+  overflow: "auto",
+  borderRadius: window.innerWidth < 768 ? 20 : 24,
+  background:
+    "linear-gradient(180deg, rgba(25,27,34,0.98) 0%, rgba(17,19,24,0.98) 100%)",
   border: "1px solid rgba(255,255,255,0.08)",
-  boxShadow: "0 30px 60px rgba(0,0,0,0.38)",
+  boxShadow: "0 30px 80px rgba(0,0,0,0.45)",
 };
 
 const modalHeader: React.CSSProperties = {
@@ -2168,9 +2079,9 @@ const closeButton: React.CSSProperties = {
 };
 
 const modalBody: React.CSSProperties = {
-  padding: 22,
   display: "grid",
   gap: 18,
+  padding: window.innerWidth < 768 ? 16 : 24,
 };
 
 const modalSection: React.CSSProperties = {
@@ -2180,7 +2091,7 @@ const modalSection: React.CSSProperties = {
 
 const modalGrid: React.CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "1fr 1fr",
+  gridTemplateColumns: window.innerWidth < 768 ? "1fr" : "1fr 1fr",
   gap: 16,
 };
 
