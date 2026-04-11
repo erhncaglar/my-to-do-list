@@ -1682,24 +1682,16 @@ const signOutButton: React.CSSProperties = {
 };
 
 const boardWrap: React.CSSProperties = {
-  display: "flex",
-  gap: window.innerWidth < 768 ? 12 : 18,
-  overflowX: "auto",
-  paddingBottom: 12,
-  alignItems: "flex-start",
-  scrollSnapType: window.innerWidth < 768 ? "x mandatory" : "none",
+  display: "grid",
+  gridTemplateColumns:
+    window.innerWidth < 768 ? "1fr" : "repeat(auto-fill, minmax(280px, 1fr))",
+  gap: 16,
+  alignItems: "start",
 };
 
 const columnStyle: React.CSSProperties = {
-  minWidth: window.innerWidth < 768 ? 280 : 340,
-  width: window.innerWidth < 768 ? 280 : 340,
-  flexShrink: 0,
-  scrollSnapAlign: "start",
-  borderRadius: 24,
-  background: "rgba(255,255,255,0.04)",
-  border: "1px solid rgba(255,255,255,0.08)",
-  padding: 14,
-  boxShadow: "0 20px 40px rgba(0,0,0,0.22)",
+  width: "100%",
+  minWidth: 0,
 };
 
 const columnHeader: React.CSSProperties = {
@@ -1916,13 +1908,9 @@ const dangerGhostButton: React.CSSProperties = {
   cursor: "pointer",
 };
 
-const addListColumn: React.CSSProperties = {
-  minWidth: 280,
-  width: 280,
-  borderRadius: 24,
-  background: "rgba(255,255,255,0.03)",
-  border: "1px dashed rgba(255,255,255,0.12)",
-  padding: 14,
+const columnStyle: React.CSSProperties = {
+  width: "100%",
+  minWidth: 0,
 };
 
 const addListButton: React.CSSProperties = {
