@@ -2058,9 +2058,14 @@ const modalHeader: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  gap: 16,
-  padding: 22,
+  gap: 12,
+  padding: window.innerWidth < 768 ? 16 : 24,
   borderBottom: "1px solid rgba(255,255,255,0.08)",
+  position: "sticky",
+  top: 0,
+  background:
+    "linear-gradient(180deg, rgba(25,27,34,0.98) 0%, rgba(17,19,24,0.98) 100%)",
+  zIndex: 2,
 };
 
 const modalEyebrow: React.CSSProperties = {
@@ -2072,14 +2077,15 @@ const modalEyebrow: React.CSSProperties = {
 };
 
 const closeButton: React.CSSProperties = {
-  border: "none",
-  background: "rgba(255,255,255,0.08)",
-  color: "white",
-  borderRadius: 12,
   width: 40,
   height: 40,
-  cursor: "pointer",
+  borderRadius: 12,
+  border: "1px solid rgba(255,255,255,0.12)",
+  background: "rgba(255,255,255,0.04)",
+  color: "#fff",
   fontSize: 18,
+  cursor: "pointer",
+  flexShrink: 0,
 };
 
 const modalBody: React.CSSProperties = {
@@ -2228,7 +2234,8 @@ const activityDate: React.CSSProperties = {
 const modalActions: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
-  alignItems: "center",
+  alignItems: window.innerWidth < 768 ? "stretch" : "center",
+  flexDirection: window.innerWidth < 768 ? "column" : "row",
   gap: 12,
-  flexWrap: "wrap",
+  marginTop: 8,
 };
