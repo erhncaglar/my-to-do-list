@@ -1599,7 +1599,8 @@ const pageStyle: React.CSSProperties = {
 };
 
 const boardArea: React.CSSProperties = {
-  minWidth: 0,
+  width: "100%",
+  overflowX: "hidden",
 };
 
 const topBarStyle: React.CSSProperties = {
