@@ -1829,7 +1829,7 @@ const emptyColumnCard: React.CSSProperties = {
 
 const taskCard: React.CSSProperties = {
   borderRadius: 18,
-  padding: 16,
+  padding: window.innerWidth < 768 ? 14 : 16,
   background:
     "linear-gradient(180deg, rgba(33,35,42,0.98) 0%, rgba(24,26,31,0.98) 100%)",
   border: "1px solid rgba(255,255,255,0.08)",
@@ -1854,16 +1854,18 @@ const taskOpenButton: React.CSSProperties = {
 
 const taskTitle: React.CSSProperties = {
   margin: 0,
-  fontSize: 18,
+  fontSize: window.innerWidth < 768 ? 16 : 18,
   fontWeight: 700,
   lineHeight: 1.35,
+  wordBreak: "break-word",
 };
 
 const taskSnippet: React.CSSProperties = {
   marginTop: 8,
-  fontSize: 13,
+  fontSize: window.innerWidth < 768 ? 12 : 13,
   opacity: 0.72,
   lineHeight: 1.45,
+  wordBreak: "break-word",
 };
 
 const tagRow: React.CSSProperties = {
@@ -1893,7 +1895,7 @@ const miniInfoRow: React.CSSProperties = {
 const moveSelect: React.CSSProperties = {
   width: "100%",
   marginTop: 12,
-  padding: "10px 12px",
+  padding: window.innerWidth < 768 ? "12px 12px" : "10px 12px",
   borderRadius: 12,
   border: "1px solid rgba(255,255,255,0.12)",
   background: "rgba(255,255,255,0.05)",
@@ -1902,30 +1904,32 @@ const moveSelect: React.CSSProperties = {
 };
 
 const taskActions: React.CSSProperties = {
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: window.innerWidth < 768 ? "1fr 1fr" : "repeat(2, max-content)",
   gap: 8,
-  flexWrap: "wrap",
   marginTop: 12,
 };
 
 const ghostButton: React.CSSProperties = {
-  padding: "10px 12px",
+  padding: window.innerWidth < 768 ? "12px 10px" : "10px 12px",
   borderRadius: 12,
   border: "1px solid rgba(255,255,255,0.12)",
   background: "rgba(255,255,255,0.04)",
   color: "white",
   fontWeight: 600,
   cursor: "pointer",
+  width: "100%",
 };
 
 const dangerGhostButton: React.CSSProperties = {
-  padding: "10px 12px",
+  padding: window.innerWidth < 768 ? "12px 10px" : "10px 12px",
   borderRadius: 12,
   border: "none",
   background: "rgba(220, 38, 38, 0.18)",
   color: "#ffb4b4",
   fontWeight: 700,
   cursor: "pointer",
+  width: "100%",
 };
 
 const addListColumn: React.CSSProperties = {
