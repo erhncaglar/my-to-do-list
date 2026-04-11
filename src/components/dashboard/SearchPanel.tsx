@@ -82,29 +82,41 @@ export default function SearchPanel({
   const isMobile = window.innerWidth < 768;
 
   return (
-    <aside
-      style={{
-        ...(isSearchOpen ? searchPanel : searchPanelCollapsed),
-        width: "100%",
-        position: isMobile ? "relative" : "sticky",
-        top: isMobile ? undefined : 24,
-        maxHeight: isMobile ? "none" : "calc(100vh - 48px)",
-        overflow: "auto",
-      }}
-    >
+  <aside
+  style={{
+    ...(isSearchOpen ? searchPanel : searchPanelCollapsed),
+    width: "100%",
+    position: isMobile ? "relative" : "sticky",
+    top: isMobile ? undefined : 24,
+    maxHeight: isMobile ? "none" : "calc(100vh - 48px)",
+    overflow: "auto",
+    padding: isMobile ? 12 : (isSearchOpen ? 18 : 10),
+    borderRadius: isMobile ? 18 : 24,
+  }}
+>
       <button
         onClick={() => setIsSearchOpen((prev) => !prev)}
-        style={{
-          ...searchToggleButton,
-          width: "100%",
-        }}
+     style={{
+  ...searchToggleButton,
+  width: "100%",
+  padding: isMobile ? "12px 14px" : searchToggleButton.padding,
+}}
       >
         {isSearchOpen ? "Filtreleri Gizle" : "Ara"}
       </button>
 
       {isSearchOpen && (
         <>
-          <h2 style={{ marginTop: 0, marginBottom: 16 }}>Arama ve Filtre</h2>
+          <h2
+  style={{
+    marginTop: 0,
+    marginBottom: 16,
+    fontSize: isMobile ? 18 : 22,
+    lineHeight: 1.15,
+  }}
+>
+  Arama ve Filtre
+</h2>
 
           <div style={filterGroup}>
             <label style={filterLabel}>Arama</label>
@@ -216,14 +228,14 @@ export default function SearchPanel({
             Filtreleri Temizle
           </button>
 
-          <div
-            style={{
-              ...searchStats,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 12,
-            }}
-          >
+       <div
+  style={{
+    ...searchStats,
+    display: "grid",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: 12,
+  }}
+>
             <div style={metricCardSmall}>
               <div style={metricLabel}>Görünen kart</div>
               <div style={metricValueSmall}>{visibleTasksCount}</div>
