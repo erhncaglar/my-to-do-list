@@ -874,7 +874,15 @@ export default function AppShell() {
               metricValue={metricValue}
             />
 
-            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <div
+  style={{
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+    width: window.innerWidth < 768 ? "100%" : "auto",
+    justifyContent: window.innerWidth < 768 ? "stretch" : "flex-start",
+  }}
+>
               <button onClick={archiveCompletedTasks} style={archiveButton}>
                 Tamamlananları Arşivle
               </button>
@@ -1593,14 +1601,15 @@ const pageStyle: React.CSSProperties = {
   background:
     "linear-gradient(180deg, #14161c 0%, #191c24 45%, #101217 100%)",
   color: "#f4f1ea",
-  padding: 24,
+  padding: window.innerWidth < 768 ? 12 : 24,
   fontFamily:
     "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+  boxSizing: "border-box",
 };
 
 const boardArea: React.CSSProperties = {
+  minWidth: 0,
   width: "100%",
-  overflowX: "hidden",
 };
 
 const topBarStyle: React.CSSProperties = {
@@ -1669,6 +1678,7 @@ const archiveButton: React.CSSProperties = {
   color: "white",
   fontWeight: 700,
   cursor: "pointer",
+  width: window.innerWidth < 768 ? "100%" : "auto",
 };
 
 const signOutButton: React.CSSProperties = {
@@ -1679,6 +1689,7 @@ const signOutButton: React.CSSProperties = {
   color: "white",
   fontWeight: 700,
   cursor: "pointer",
+  width: window.innerWidth < 768 ? "100%" : "auto",
 };
 
 const boardWrap: React.CSSProperties = {
